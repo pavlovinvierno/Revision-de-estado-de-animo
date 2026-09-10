@@ -1,3 +1,4 @@
+const $=id=>document.getElementById(id);
 const KEY="estadoTrackerV3";
 let entries=JSON.parse(localStorage.getItem(KEY)||"[]");
 const ids=["date","sleepHours","sleepStart","sleepEnd","sleepNeed","energy","lowMood","activation","irritability","thoughtSpeed","concentration","risk","dissociation","riskBehavior","rested","reducedNeed","physical","behaviors","observation"];
@@ -21,7 +22,6 @@ ids.forEach(id=>{
 });
 window.addEventListener("beforeunload",saveDraft);
 
-const $=id=>document.getElementById(id);
 $("date").value=new Date().toISOString().slice(0,10);
 restoreDraft();
 function val(id){return $(id).value}
@@ -76,8 +76,27 @@ function render(){renderTimeline();renderPatterns();renderEntries()}
 window.delEntry=id=>{entries=entries.filter(e=>String(e.id)!==String(id));save()}
 $("todayBtn").onclick=()=>{let to=new Date(),from=new Date();from.setDate(to.getDate()-13);$("to").value=to.toISOString().slice(0,10);$("from").value=from.toISOString().slice(0,10);render()};
 ["from","to"].forEach(id=>$(id).addEventListener("change",render));
-$("exportJson").onclick=()=>download("registro_estado_v3.json",JSON.stringify(entries,null,2),"application/json");
-$("exportCsv").onclick=()=>{if(!entries.length)return;let keys=Object.keys(entries[0]),rows=[keys,...entries.map(e=>keys.map(k=>String(e[k]??"").replaceAll('"','""')))];let csv=rows.map(r=>r.map(x=>`"${x}"`).join(",")).join("\n");download("registro_estado_v3.csv",csv,"text/csv")};
+async function exportFile(name,data,type){
+  const file=new File([data],name,{type});
+  // iOS PWA/Safari: use the native Share sheet so the user can save to Files.
+  if(navigator.share && navigator.canShare){
+    try{
+      if(navigator.canShare({files:[file]})){
+        await navigator.share({files:[file],title:name});
+        return;
+      }
+    }catch(err){
+      if(err && err.name==="AbortError") return;
+    }
+  }
+  // Fallback for browsers without file sharing.
+  const url=URL.createObjectURL(file);
+  const a=document.createElement("a");
+  a.href=url; a.download=name; document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+$("exportJson").onclick=()=>exportFile("registro_estado_v3.json",JSON.stringify(entries,null,2),"application/json");
+$("exportCsv").onclick=()=>{if(!entries.length){alert("No hay registros para exportar.");return;}let keys=Object.keys(entries[0]),rows=[keys,...entries.map(e=>keys.map(k=>String(e[k]??"").replaceAll('"','""')))];let csv=rows.map(r=>r.map(x=>`"${x}"`).join(",")).join("\n");exportFile("registro_estado_v3.csv",csv,"text/csv")};
 $("importJson").onclick=()=>$("fileInput").click();
 $("fileInput").onchange=async e=>{try{let x=JSON.parse(await e.target.files[0].text());if(!Array.isArray(x))throw Error();entries=x;save();alert("Importación completada.")}catch{alert("Archivo JSON no válido.")}};
 function download(name,data,type){let a=document.createElement("a");a.href=URL.createObjectURL(new Blob([data],{type}));a.download=name;a.click();URL.revokeObjectURL(a.href)}
