@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Registro de Estado — v3</title>
+<link rel="stylesheet" href="styles.css">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#17202a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Estado">
+</head>
+<body>
+<header>
+  <div>
+    <h1>Registro de Estado</h1>
+    <p>Seguimiento diario de sueño, activación, ánimo, síntomas y conductas.</p>
+  </div>
+  <span class="version">v3 · cronología</span>
+</header>
+
+<main>
+<section class="card">
+<h2>Nuevo registro</h2>
+<form id="entryForm">
+<div class="grid">
+<label>Fecha<input id="date" type="date" required></label>
+<label>Horas de sueño<input id="sleepHours" type="number" min="0" max="24" step=".1"></label>
+<label>Inicio del sueño<input id="sleepStart" type="time"></label>
+<label>Fin del sueño<input id="sleepEnd" type="time"></label>
+<label>Necesidad percibida de dormir (1–10)<input id="sleepNeed" type="number" min="1" max="10"></label>
+<label>Energía (1–10)<input id="energy" type="number" min="1" max="10"></label>
+<label>Ánimo bajo (1–10)<input id="lowMood" type="number" min="1" max="10"></label>
+<label>Activación/aceleración (1–10)<input id="activation" type="number" min="1" max="10"></label>
+<label>Irritabilidad (1–10)<input id="irritability" type="number" min="1" max="10"></label>
+<label>Velocidad del pensamiento (1–10)<input id="thoughtSpeed" type="number" min="1" max="10"></label>
+<label>Concentración (1–10)<input id="concentration" type="number" min="1" max="10"></label>
+<label>Impulsividad/búsqueda de riesgo (1–10)<input id="risk" type="number" min="1" max="10"></label>
+<label>Disociación / extrañeza<select id="dissociation"><option value="">—</option><option>Sí</option><option>No</option></select></label>
+<label>Conducta de riesgo<select id="riskBehavior"><option value="">—</option><option>Sí</option><option>No</option></select></label>
+<label>¿Me sentí descansado al despertar?<select id="rested"><option value="">—</option><option>Sí</option><option>No</option></select></label>
+<label>¿Sentí menor necesidad de dormir?<select id="reducedNeed"><option value="">—</option><option>Sí</option><option>No</option></select></label>
+<label class="wide">Síntomas físicos<textarea id="physical" placeholder="Dolor, náusea, disnea, cefalea, tensión, etc."></textarea></label>
+<label class="wide">Conductas relevantes<textarea id="behaviors" placeholder="Cambios de actividad, aislamiento, riesgo, conflictos, impulsos, etc."></textarea></label>
+<label class="wide">Observación libre<textarea id="observation"></textarea></label>
+</div>
+<div class="actions"><button>Guardar registro</button><button type="button" class="secondary" id="clearBtn">Limpiar</button></div>
+</form>
+</section>
+
+<section class="card">
+<h2>Cronología</h2>
+<p class="muted">La cronología permite observar secuencias, no diagnostica episodios.</p>
+<div class="toolbar">
+<label>Desde<input id="from" type="date"></label>
+<label>Hasta<input id="to" type="date"></label>
+<button id="todayBtn" class="secondary">Últimos 14 días</button>
+</div>
+<div id="timeline"></div>
+</section>
+
+<section class="card">
+<h2>Patrones</h2>
+<div id="patterns" class="patterns"></div>
+</section>
+
+<section class="card">
+<h2>Registros guardados</h2>
+<div class="actions">
+<button id="exportJson">Exportar JSON</button>
+<button id="importJson" class="secondary">Importar JSON</button>
+<input id="fileInput" type="file" accept=".json" hidden>
+<button id="exportCsv" class="secondary">Exportar CSV</button>
+</div>
+<div id="entries"></div>
+</section>
+</main>
+<script src="app.js"></script>
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js").catch(()=>{}));
+}
+</script>
+</body>
+</html>
