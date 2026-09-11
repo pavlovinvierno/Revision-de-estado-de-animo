@@ -1,13 +1,1 @@
-{
-  "name":"Registro de Estado",
-  "short_name":"Estado",
-  "start_url":"./index.html",
-  "display":"standalone",
-  "background_color":"#f4f6f8",
-  "theme_color":"#17202a",
-  "description":"Registro personal de sueño, estado, síntomas y conductas.",
-  "icons":[
-    {"src":"icon-192.png","sizes":"192x192","type":"image/png","purpose":"any maskable"},
-    {"src":"icon-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}
-  ]
-}
+{"name":"Registro de Estado v6","short_name":"Estado","start_url":"./index.html","display":"standalone","background_color":"#f4f6f8","theme_color":"#17202a","icons":[{"src":"icon-192.png","sizes":"192x192","type":"image/png"},{"src":"icon-512.png","sizes":"512x512","type":"image/png"}]}

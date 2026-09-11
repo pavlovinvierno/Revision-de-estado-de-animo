@@ -1,42 +1,24 @@
-# Registro de Estado v5
+# Registro de Estado v6 — PWA
 
-Aplicación web estática para registrar sueño, energía, activación, ánimo, riesgo, disociación, síntomas físicos, conductas y observaciones.
+Aplicación web estática para seguimiento longitudinal de sueño, estado, contexto, eventos y funcionamiento.
 
-## Novedades v3
-- Cronología diaria.
-- Filtros por fecha.
-- Vista conjunta de sueño, energía, activación, ánimo, irritabilidad, pensamiento, concentración, riesgo y necesidad de dormir.
-- Variables específicas para distinguir **horas dormidas** de **necesidad percibida de dormir**.
-- Registro de si hubo sensación de menor necesidad de dormir y si se despertó descansado.
-- Detección descriptiva de patrones simples.
-- Edición indirecta por fecha: guardar otro registro en la misma fecha lo reemplaza.
-- Exportación JSON y CSV.
-- Importación JSON.
-- Todo permanece local en el navegador mediante localStorage.
+## Cambios principales
+- Múltiples registros por día; cada observación tiene ID propio y hora opcional.
+- Tipo de registro: diario o evento/episodio.
+- Duración del evento.
+- Escalas 1–10 con anclajes descriptivos para mejorar consistencia.
+- Calidad de sueño, necesidad de dormir, menor necesidad y sensación de descanso.
+- Funcionamiento global.
+- Contexto: trabajo, universidad, cafeína, nicotina, sustancias, cambios de medicación, estresores y conflictos interpersonales.
+- Campo para describir qué ocurrió antes del cambio.
+- Patrones por convergencia de variables, no solo conteos aislados.
+- Informe y PDF.
+- Exportación JSON/CSV usando el menú de compartir de iOS cuando está disponible.
+- Mantiene la clave de almacenamiento `estadoTrackerV3` para conservar los registros existentes.
+- Sin PIN/biometría.
+
+## Privacidad
+Los registros permanecen en el almacenamiento local del navegador/PWA. GitHub Pages aloja el código, no los registros.
 
 ## GitHub Pages
-Sube `index.html`, `styles.css`, `app.js` y `README.md` a un repositorio y activa GitHub Pages desde Settings → Pages.
-
-## Nota
-La sección “Patrones” es descriptiva. No diagnostica trastornos ni determina por sí sola que exista un episodio afectivo.
-
-
-## v3 PWA para iPhone
-Esta versión puede instalarse como una aplicación desde Safari:
-**Safari → Compartir → Añadir a pantalla de inicio**.
-
-### Guardado automático de formularios
-Los datos de un registro que todavía no hayas enviado se guardan como **borrador local automáticamente** mientras escribes. Si cierras Safari, cambias de app o recargas, el formulario puede recuperarse en el mismo dispositivo/navegador.
-
-El registro definitivo continúa guardándose localmente y puede exportarse en JSON/CSV.
-
-
-## v5 — exportación compatible con iPhone
-
-La exportación JSON y CSV usa la hoja nativa de Compartir de iOS cuando está disponible, para poder elegir **Guardar en Archivos**. En otros navegadores se conserva la descarga tradicional.
-
-Los registros siguen almacenándose localmente en el dispositivo mediante `localStorage`; actualizar los archivos de GitHub no borra los registros existentes porque se conserva la misma clave `estadoTrackerV3`.
-
-
-## Informe del periodo
-La v5 añade un informe visual con promedios, señales descriptivas, gráfico de tendencias, cronología detallada y tabla. Desde el informe puedes usar “Imprimir / Guardar PDF” para generar un PDF con las funciones de impresión del iPhone.
+Sube el contenido de esta carpeta a la raíz de la rama `main` y usa GitHub Pages con `Deploy from a branch` → `main` → `/(root)`.
