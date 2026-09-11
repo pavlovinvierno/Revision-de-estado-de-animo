@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Registro de Estado — v3</title>
+<title>Registro de Estado — v5</title>
 <link rel="stylesheet" href="styles.css">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#17202a">
@@ -17,7 +17,7 @@
     <h1>Registro de Estado</h1>
     <p>Seguimiento diario de sueño, activación, ánimo, síntomas y conductas.</p>
   </div>
-  <span class="version">v3 · cronología</span>
+  <span class="version">v5 · informes</span>
 </header>
 
 <main>
@@ -63,6 +63,16 @@
 <section class="card">
 <h2>Patrones</h2>
 <div id="patterns" class="patterns"></div>
+</section>
+
+<section class="card">
+<h2>Informe del periodo</h2>
+<p class="muted">Genera un informe visual con estadísticas, tendencias y cronología. El informe es descriptivo y no establece diagnósticos.</p>
+<div class="actions">
+<button id="reportBtn">Generar informe</button>
+<button id="printReportBtn" class="secondary">Imprimir / Guardar PDF</button>
+</div>
+<div id="reportStatus" class="report-status"></div>
 </section>
 
 <section class="card">

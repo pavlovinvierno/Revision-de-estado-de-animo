@@ -1,4 +1,4 @@
-# Registro de Estado v4
+# Registro de Estado v5
 
 Aplicación web estática para registrar sueño, energía, activación, ánimo, riesgo, disociación, síntomas físicos, conductas y observaciones.
 
@@ -31,8 +31,12 @@ Los datos de un registro que todavía no hayas enviado se guardan como **borrado
 El registro definitivo continúa guardándose localmente y puede exportarse en JSON/CSV.
 
 
-## v4 — exportación compatible con iPhone
+## v5 — exportación compatible con iPhone
 
 La exportación JSON y CSV usa la hoja nativa de Compartir de iOS cuando está disponible, para poder elegir **Guardar en Archivos**. En otros navegadores se conserva la descarga tradicional.
 
 Los registros siguen almacenándose localmente en el dispositivo mediante `localStorage`; actualizar los archivos de GitHub no borra los registros existentes porque se conserva la misma clave `estadoTrackerV3`.
+
+
+## Informe del periodo
+La v5 añade un informe visual con promedios, señales descriptivas, gráfico de tendencias, cronología detallada y tabla. Desde el informe puedes usar “Imprimir / Guardar PDF” para generar un PDF con las funciones de impresión del iPhone.
