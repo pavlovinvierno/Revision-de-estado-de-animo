@@ -1,4 +1,4 @@
-# Registro de Estado v6 — PWA
+# Registro de Estado v7 — PWA
 
 Aplicación web estática para seguimiento longitudinal de sueño, estado, contexto, eventos y funcionamiento.
 
@@ -6,7 +6,7 @@ Aplicación web estática para seguimiento longitudinal de sueño, estado, conte
 - Múltiples registros por día; cada observación tiene ID propio y hora opcional.
 - Tipo de registro: diario o evento/episodio.
 - Duración del evento.
-- Escalas 1–10 con anclajes descriptivos para mejorar consistencia.
+- Escalas 1–5 con anclajes descriptivos para mejorar consistencia.
 - Calidad de sueño, necesidad de dormir, menor necesidad y sensación de descanso.
 - Funcionamiento global.
 - Contexto: trabajo, universidad, cafeína, nicotina, sustancias, cambios de medicación, estresores y conflictos interpersonales.

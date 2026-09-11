@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="Estado">
 </head>
 <body>
-<header><div><h1>Registro de Estado</h1><p>Seguimiento longitudinal de sueño, estado, contexto, eventos y funcionamiento.</p></div><span class="version">v6 · longitudinal</span></header>
+<header><div><h1>Registro de Estado</h1><p>Seguimiento longitudinal de sueño, estado, contexto, eventos y funcionamiento./p></div><span class="version">v7 · escalas 1–5</span></header>
 <main>
 <section class="card">
 <h2>Nuevo registro</h2>
@@ -22,19 +22,19 @@
 <label>Horas de sueño<input id="sleepHours" type="number" min="0" max="24" step="0.1"></label>
 <label>Inicio del sueño<input id="sleepStart" type="time"></label>
 <label>Fin del sueño<input id="sleepEnd" type="time"></label>
-<label>Calidad del sueño (1–10)<input id="sleepQuality" type="number" min="1" max="10"><small>1 = pésima · 5 = regular · 10 = excelente</small></label>
-<label>Necesidad percibida de dormir (1–10)<input id="sleepNeed" type="number" min="1" max="10"><small>1 = casi ninguna · 5 = habitual · 10 = muy intensa</small></label>
+<label>Calidad del sueño (1–5)<select id="sleepQuality"><option value="">—</option><option value="1">1 — Muy mala</option><option value="2">2 — Mala</option><option value="3">3 — Regular</option><option value="4">4 — Buena</option><option value="5">5 — Excelente</option></select><small>Valora qué tan reparador fue el sueño, no cuántas horas dormiste.</small></label>
+<label>Necesidad percibida de dormir (1–5)<select id="sleepNeed"><option value="">—</option><option value="1">1 — Casi ninguna</option><option value="2">2 — Baja</option><option value="3">3 — Habitual</option><option value="4">4 — Alta</option><option value="5">5 — Muy intensa</option></select><small>Valora cuánto sentías que necesitabas dormir.</small></label>
 <label>¿Sentí menor necesidad de dormir?<select id="reducedNeed"><option value="">—</option><option>Sí</option><option>No</option></select><small>Valora necesidad, no solo insomnio.</small></label>
 <label>¿Me sentí descansado al despertar?<select id="rested"><option value="">—</option><option>Sí</option><option>No</option></select></label>
 
-<label>Energía (1–10)<input id="energy" type="number" min="1" max="10"><small>1 = sin energía · 5 = habitual · 10 = excepcionalmente alta</small></label>
-<label>Ánimo bajo (1–10)<input id="lowMood" type="number" min="1" max="10"><small>1 = mínimo · 5 = marcado · 10 = extremo</small></label>
-<label>Activación / aceleración (1–10)<input id="activation" type="number" min="1" max="10"><small>1 = muy apagado · 5 = habitual · 10 = extremadamente acelerado</small></label>
-<label>Irritabilidad (1–10)<input id="irritability" type="number" min="1" max="10"><small>1 = mínima · 5 = marcada · 10 = extrema</small></label>
-<label>Velocidad del pensamiento (1–10)<input id="thoughtSpeed" type="number" min="1" max="10"><small>1 = muy lento · 5 = habitual · 10 = muy acelerado</small></label>
-<label>Concentración (1–10)<input id="concentration" type="number" min="1" max="10"><small>1 = casi imposible · 5 = habitual · 10 = excepcional</small></label>
-<label>Impulsividad / búsqueda de riesgo (1–10)<input id="risk" type="number" min="1" max="10"><small>1 = mínima · 5 = habitual · 10 = extrema</small></label>
-<label>Funcionamiento global (1–10)<input id="functioning" type="number" min="1" max="10"><small>1 = prácticamente incapaz · 5 = parcialmente afectado · 10 = funcionamiento habitual/alto</small></label>
+<label>Energía (1–5)<select id="energy"><option value="">—</option><option value="1">1 — Muy baja</option><option value="2">2 — Baja</option><option value="3">3 — Habitual</option><option value="4">4 — Alta</option><option value="5">5 — Muy alta</option></select><small>Disponibilidad física/mental para realizar actividades.</small></label>
+<label>Ánimo bajo (1–5)<select id="lowMood"><option value="">—</option><option value="1">1 — Ausente/mínimo</option><option value="2">2 — Leve</option><option value="3">3 — Moderado</option><option value="4">4 — Alto</option><option value="5">5 — Muy intenso</option></select><small>Intensidad del malestar o ánimo bajo.</small></label>
+<label>Activación / aceleración (1–5)<select id="activation"><option value="">—</option><option value="1">1 — Muy baja/apagado</option><option value="2">2 — Baja</option><option value="3">3 — Habitual</option><option value="4">4 — Alta/acelerado</option><option value="5">5 — Muy alta/extrema</option></select><small>Nivel de activación, inquietud o aceleración del sistema.</small></label>
+<label>Irritabilidad (1–5)<select id="irritability"><option value="">—</option><option value="1">1 — Mínima</option><option value="2">2 — Leve</option><option value="3">3 — Moderada</option><option value="4">4 — Alta</option><option value="5">5 — Extrema</option></select></label>
+<label>Velocidad del pensamiento (1–5)<select id="thoughtSpeed"><option value="">—</option><option value="1">1 — Muy lento</option><option value="2">2 — Lento</option><option value="3">3 — Habitual</option><option value="4">4 — Rápido</option><option value="5">5 — Muy acelerado</option></select></label>
+<label>Concentración (1–5)<select id="concentration"><option value="">—</option><option value="1">1 — Casi imposible</option><option value="2">2 — Muy difícil</option><option value="3">3 — Habitual</option><option value="4">4 — Buena</option><option value="5">5 — Excelente</option></select></label>
+<label>Impulsividad / búsqueda de riesgo (1–5)<select id="risk"><option value="">—</option><option value="1">1 — Mínima</option><option value="2">2 — Baja</option><option value="3">3 — Habitual</option><option value="4">4 — Alta</option><option value="5">5 — Muy alta/extrema</option></select></label>
+<label>Funcionamiento global (1–5)<select id="functioning"><option value="">—</option><option value="1">1 — Muy deteriorado</option><option value="2">2 — Bastante deteriorado</option><option value="3">3 — Parcialmente afectado</option><option value="4">4 — Casi habitual</option><option value="5">5 — Habitual</option></select><small>Qué tanto pudiste funcionar en tus actividades habituales.</small></label>
 <label>Disociación / extrañeza<select id="dissociation"><option value="">—</option><option>Sí</option><option>No</option></select></label>
 <label>Conducta de riesgo<select id="riskBehavior"><option value="">—</option><option>Sí</option><option>No</option></select></label>
 
@@ -59,7 +59,7 @@
 
 <section class="card"><h2>Patrones descriptivos</h2><p class="muted">Busca combinaciones y secuencias en los datos. No establece diagnósticos.</p><div id="patterns" class="patterns"></div></section>
 
-<section class="card"><h2>Informe del periodo</h2><p class="muted">Genera un informe con estadísticas, tendencias, asociaciones descriptivas y cronología.</p><div class="actions"><button id="reportBtn">Generar informe</button><button id="printReportBtn" class="secondary">Imprimir / Guardar PDF</button></div><div id="reportStatus" class="report-status"></div></section>
+<section class="card"><h2>Informe del periodo</h2><p class="muted">Genera un informe con estadísticas, tendencias, asociaciones descriptivas y cronología. Las escalas subjetivas se expresan de 1 a 5.</p><div class="actions"><button id="reportBtn">Generar informe</button><button id="printReportBtn" class="secondary">Imprimir / Guardar PDF</button></div><div id="reportStatus" class="report-status"></div></section>
 
 <section class="card"><h2>Registros guardados</h2><div class="actions"><button id="exportJson">Exportar JSON</button><button id="importJson" class="secondary">Importar JSON</button><input id="fileInput" type="file" accept=".json" hidden><button id="exportCsv" class="secondary">Exportar CSV</button></div><div id="entries"></div></section>
 </main>
