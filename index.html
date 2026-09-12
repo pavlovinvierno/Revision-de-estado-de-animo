@@ -2,66 +2,60 @@
 <html lang="es">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Registro de Estado — v6</title>
+<title>Registro de Estado — v8</title>
 <link rel="stylesheet" href="styles.css"><link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#17202a"><meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="Estado">
 </head>
 <body>
-<header><div><h1>Registro de Estado</h1><p>Seguimiento longitudinal de sueño, estado, contexto, eventos y funcionamiento./p></div><span class="version">v7 · escalas 1–5</span></header>
+<header><div><h1>Registro de Estado</h1><p>Seguimiento longitudinal de sueño, estado, contexto y funcionamiento.</p></div><span class="version">v8 · observación longitudinal</span></header>
 <main>
 <section class="card">
 <h2>Nuevo registro</h2>
-<p class="muted">Puedes guardar varios registros el mismo día. Usa <b>Registro diario</b> para una valoración global y <b>Evento</b> para un cambio puntual o episodio.</p>
+<p class="muted">Un registro es simplemente una observación en un momento concreto. No necesitas decidir si lo que ocurrió fue un «evento» o un «episodio»; los cambios se analizan posteriormente a partir de la secuencia temporal.</p>
 <form id="entryForm">
 <div class="grid">
 <label>Fecha<input id="date" type="date" required></label>
 <label>Hora / momento<input id="time" type="time"></label>
-<label>Tipo de registro<select id="recordType"><option value="Diario">Registro diario</option><option value="Evento">Evento / episodio</option></select></label>
-<label>Duración del evento<input id="duration" type="text" placeholder="Ej. 3 h 20 min"></label>
 <label>Horas de sueño<input id="sleepHours" type="number" min="0" max="24" step="0.1"></label>
 <label>Inicio del sueño<input id="sleepStart" type="time"></label>
-<label>Fin del sueño<input id="sleepEnd" type="time"></label>
-<label>Calidad del sueño (1–5)<select id="sleepQuality"><option value="">—</option><option value="1">1 — Muy mala</option><option value="2">2 — Mala</option><option value="3">3 — Regular</option><option value="4">4 — Buena</option><option value="5">5 — Excelente</option></select><small>Valora qué tan reparador fue el sueño, no cuántas horas dormiste.</small></label>
-<label>Necesidad percibida de dormir (1–5)<select id="sleepNeed"><option value="">—</option><option value="1">1 — Casi ninguna</option><option value="2">2 — Baja</option><option value="3">3 — Habitual</option><option value="4">4 — Alta</option><option value="5">5 — Muy intensa</option></select><small>Valora cuánto sentías que necesitabas dormir.</small></label>
-<label>¿Sentí menor necesidad de dormir?<select id="reducedNeed"><option value="">—</option><option>Sí</option><option>No</option></select><small>Valora necesidad, no solo insomnio.</small></label>
-<label>¿Me sentí descansado al despertar?<select id="rested"><option value="">—</option><option>Sí</option><option>No</option></select></label>
-
-<label>Energía (1–5)<select id="energy"><option value="">—</option><option value="1">1 — Muy baja</option><option value="2">2 — Baja</option><option value="3">3 — Habitual</option><option value="4">4 — Alta</option><option value="5">5 — Muy alta</option></select><small>Disponibilidad física/mental para realizar actividades.</small></label>
-<label>Ánimo bajo (1–5)<select id="lowMood"><option value="">—</option><option value="1">1 — Ausente/mínimo</option><option value="2">2 — Leve</option><option value="3">3 — Moderado</option><option value="4">4 — Alto</option><option value="5">5 — Muy intenso</option></select><small>Intensidad del malestar o ánimo bajo.</small></label>
-<label>Activación / aceleración (1–5)<select id="activation"><option value="">—</option><option value="1">1 — Muy baja/apagado</option><option value="2">2 — Baja</option><option value="3">3 — Habitual</option><option value="4">4 — Alta/acelerado</option><option value="5">5 — Muy alta/extrema</option></select><small>Nivel de activación, inquietud o aceleración del sistema.</small></label>
-<label>Irritabilidad (1–5)<select id="irritability"><option value="">—</option><option value="1">1 — Mínima</option><option value="2">2 — Leve</option><option value="3">3 — Moderada</option><option value="4">4 — Alta</option><option value="5">5 — Extrema</option></select></label>
-<label>Velocidad del pensamiento (1–5)<select id="thoughtSpeed"><option value="">—</option><option value="1">1 — Muy lento</option><option value="2">2 — Lento</option><option value="3">3 — Habitual</option><option value="4">4 — Rápido</option><option value="5">5 — Muy acelerado</option></select></label>
-<label>Concentración (1–5)<select id="concentration"><option value="">—</option><option value="1">1 — Casi imposible</option><option value="2">2 — Muy difícil</option><option value="3">3 — Habitual</option><option value="4">4 — Buena</option><option value="5">5 — Excelente</option></select></label>
-<label>Impulsividad / búsqueda de riesgo (1–5)<select id="risk"><option value="">—</option><option value="1">1 — Mínima</option><option value="2">2 — Baja</option><option value="3">3 — Habitual</option><option value="4">4 — Alta</option><option value="5">5 — Muy alta/extrema</option></select></label>
-<label>Funcionamiento global (1–5)<select id="functioning"><option value="">—</option><option value="1">1 — Muy deteriorado</option><option value="2">2 — Bastante deteriorado</option><option value="3">3 — Parcialmente afectado</option><option value="4">4 — Casi habitual</option><option value="5">5 — Habitual</option></select><small>Qué tanto pudiste funcionar en tus actividades habituales.</small></label>
-<label>Disociación / extrañeza<select id="dissociation"><option value="">—</option><option>Sí</option><option>No</option></select></label>
-<label>Conducta de riesgo<select id="riskBehavior"><option value="">—</option><option>Sí</option><option>No</option></select></label>
-
+<label>Fin del sueño / desperté a<input id="sleepEnd" type="time"><small>Permite calcular automáticamente el tiempo despierto.</small></label>
+<label>Calidad del sueño (1–5)<select id="sleepQuality"><option value="">—</option><option value="1">1 — Muy mala</option><option value="2">2 — Mala</option><option value="3">3 — Regular</option><option value="4">4 — Buena</option><option value="5">5 — Excelente</option></select><small>Qué tan reparador fue el sueño, independientemente de las horas.</small></label>
+<label>Necesidad percibida de dormir (1–5)<select id="sleepNeed"><option value="">—</option><option value="1">1 — Mucho menor de lo habitual</option><option value="2">2 — Algo menor</option><option value="3">3 — Habitual</option><option value="4">4 — Algo mayor</option><option value="5">5 — Mucho mayor</option></select></label>
+<label>¿Sentí menor necesidad de dormir?<select id="reducedNeed"><option value="">—</option><option>Sí</option><option>No</option><option>No estoy seguro</option></select></label>
+<label>¿Me sentí descansado al despertar?<select id="rested"><option value="">—</option><option>Sí</option><option>No</option><option>No estoy seguro</option></select></label>
+<label>Energía (1–5)<select id="energy"><option value="">—</option><option value="1">1 — Extremadamente baja</option><option value="2">2 — Baja</option><option value="3">3 — Habitual</option><option value="4">4 — Alta</option><option value="5">5 — Excepcionalmente alta</option></select></label>
+<label>Ánimo bajo (1–5)<select id="lowMood"><option value="">—</option><option value="1">1 — Ausente o mínimo</option><option value="2">2 — Leve</option><option value="3">3 — Moderado</option><option value="4">4 — Intenso</option><option value="5">5 — Muy intenso</option></select></label>
+<label>Activación / aceleración (1–5)<select id="activation"><option value="">—</option><option value="1">1 — Muy baja / apagado</option><option value="2">2 — Baja</option><option value="3">3 — Habitual</option><option value="4">4 — Alta / acelerado</option><option value="5">5 — Muy alta / extrema</option></select></label>
+<label>Irritabilidad (1–5)<select id="irritability"><option value="">—</option><option value="1">1 — Mínima</option><option value="2">2 — Leve</option><option value="3">3 — Moderada / habitual</option><option value="4">4 — Alta</option><option value="5">5 — Extrema</option></select></label>
+<label>Velocidad del pensamiento (1–5)<select id="thoughtSpeed"><option value="">—</option><option value="1">1 — Muy lenta</option><option value="2">2 — Lenta</option><option value="3">3 — Habitual</option><option value="4">4 — Rápida</option><option value="5">5 — Muy acelerada</option></select></label>
+<label>Dificultad para concentrarme (1–5)<select id="concentration"><option value="">—</option><option value="1">1 — Ninguna</option><option value="2">2 — Leve</option><option value="3">3 — Moderada / habitual</option><option value="4">4 — Marcada</option><option value="5">5 — Extrema</option></select></label>
+<label>Impulsividad / tendencia al riesgo (1–5)<select id="risk"><option value="">—</option><option value="1">1 — Mínima</option><option value="2">2 — Baja</option><option value="3">3 — Habitual</option><option value="4">4 — Alta</option><option value="5">5 — Muy alta / extrema</option></select></label>
+<label>Dificultad para funcionar (1–5)<select id="functioning"><option value="">—</option><option value="1">1 — Ninguna</option><option value="2">2 — Leve</option><option value="3">3 — Moderada</option><option value="4">4 — Importante</option><option value="5">5 — Extrema</option></select></label>
+<label>Disociación / extrañeza<select id="dissociation"><option value="">—</option><option>Sí</option><option>No</option><option>No estoy seguro</option></select></label>
+<label>Conducta de riesgo<select id="riskBehavior"><option value="">—</option><option>Sí</option><option>No</option><option>No estoy seguro</option></select></label>
 <label>Trabajo<select id="workContext"><option value="">—</option><option>No trabajé</option><option>Turno habitual</option><option>Turno nocturno</option><option>Turno especialmente demandante</option></select></label>
 <label>Universidad<select id="schoolContext"><option value="">—</option><option>No hubo</option><option>Carga habitual</option><option>Alta carga</option><option>Muy alta carga</option></select></label>
 <label>Cafeína<select id="caffeine"><option value="">—</option><option>Ninguna</option><option>Baja</option><option>Moderada</option><option>Alta</option></select></label>
 <label>Nicotina<select id="nicotine"><option value="">—</option><option>No</option><option>Sí</option></select></label>
-<label>Alcohol / otras sustancias<select id="substances"><option value="">—</option><option>No</option><option>Sí</option></select></label>
+<label>Alcohol / otras sustancias<select id="substances"><option value="">—</option><option>No</option><option>Sí</option><option>Prefiero no responder</option></select></label>
 <label>Medicamentos / cambios<select id="medChanges"><option value="">—</option><option>Sin cambios</option><option>Cambio / omisión</option><option>Nuevo medicamento</option></select></label>
-<label>¿Hubo un estresor relevante?<select id="stressor"><option value="">—</option><option>No identificado</option><option>Sí</option></select></label>
-<label>¿Hubo conflicto interpersonal?<select id="interpersonal"><option value="">—</option><option>No</option><option>Sí</option></select></label>
-<label class="wide">¿Qué ocurrió antes del cambio?<textarea id="preceding" placeholder="Desencadenante o contexto inmediatamente previo; si no identificas uno, escribe 'no identificado'."></textarea></label>
+<label>¿Hubo un estresor relevante?<select id="stressor"><option value="">—</option><option>No identificado</option><option>Sí</option><option>No estoy seguro</option></select></label>
+<label>¿Hubo conflicto interpersonal?<select id="interpersonal"><option value="">—</option><option>No</option><option>Sí</option><option>No estoy seguro</option></select></label>
+<label class="wide">¿Qué ocurrió antes del cambio?<textarea id="preceding" placeholder="Describe el contexto inmediatamente previo; si no identificas uno, puedes dejarlo vacío."></textarea></label>
 <label class="wide">Síntomas físicos<textarea id="physical" placeholder="Dolor, náusea, disnea, cefalea, tensión, cambios sensoriales, etc."></textarea></label>
-<label class="wide">Conductas relevantes<textarea id="behaviors" placeholder="Cambios de actividad, aislamiento, impulsos, conductas de riesgo, búsqueda de estímulos, etc."></textarea></label>
+<label class="wide">Conductas relevantes<textarea id="behaviors" placeholder="Cambios de actividad, aislamiento, impulsos, búsqueda de estímulos, conductas de riesgo, etc."></textarea></label>
 <label class="wide">Observación libre<textarea id="observation" placeholder="Describe lo que ocurrió sin intentar interpretarlo o diagnosticarlo."></textarea></label>
-</div>
-<div class="actions"><button>Guardar registro</button><button type="button" class="secondary" id="clearBtn">Limpiar</button></div>
-</form></section>
-
-<section class="card"><h2>Cronología</h2><p class="muted">La cronología conserva múltiples observaciones del mismo día y permite ver cambios dentro de la jornada. No diagnostica episodios.</p>
+</div><div class="actions"><button>Guardar registro</button><button type="button" class="secondary" id="clearBtn">Limpiar</button></div></form></section>
+<section class="card"><h2>Cronología</h2><p class="muted">Las observaciones se ordenan por fecha y hora. El tiempo despierto se calcula automáticamente cuando existe una hora de despertar registrada.</p>
 <div class="toolbar"><label>Desde<input id="from" type="date"></label><label>Hasta<input id="to" type="date"></label><button id="todayBtn" class="secondary">Últimos 14 días</button></div><div id="timeline"></div></section>
 
-<section class="card"><h2>Patrones descriptivos</h2><p class="muted">Busca combinaciones y secuencias en los datos. No establece diagnósticos.</p><div id="patterns" class="patterns"></div></section>
+<section class="card"><h2>Patrones descriptivos</h2><p class="muted">Señala coincidencias, desviaciones y calidad de los datos. No establece diagnósticos ni causalidad.</p><div id="patterns" class="patterns"></div></section>
 
 <section class="card"><h2>Informe del periodo</h2><p class="muted">Genera un informe con estadísticas, tendencias, asociaciones descriptivas y cronología. Las escalas subjetivas se expresan de 1 a 5.</p><div class="actions"><button id="reportBtn">Generar informe</button><button id="printReportBtn" class="secondary">Imprimir / Guardar PDF</button></div><div id="reportStatus" class="report-status"></div></section>
 
 <section class="card"><h2>Registros guardados</h2><div class="actions"><button id="exportJson">Exportar JSON</button><button id="importJson" class="secondary">Importar JSON</button><input id="fileInput" type="file" accept=".json" hidden><button id="exportCsv" class="secondary">Exportar CSV</button></div><div id="entries"></div></section>
+<section class="card about"><h2>Acerca del proyecto</h2><p><b>Desarrollado por:</b> Angel Lozano Vazquez</p><p><b>Contacto / Sugerencias:</b> Soylozanoangel@gmail.com</p><p>Estudiante de la Licenciatura de Médico Cirujano Partero, Universidad México Americana del Norte</p></section>
 </main>
 <script src="app.js"></script><script>if("serviceWorker"in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));}</script>
 </body></html>
