@@ -2,28 +2,20 @@
 <html lang="es">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Registro de Estado — v8</title>
+<title>Registro de Estado — v9</title>
 <link rel="stylesheet" href="styles.css"><link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#17202a"><meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="Estado">
 </head>
 <body>
-<header><div><h1>Registro de Estado</h1><p>Seguimiento longitudinal de sueño, estado, contexto y funcionamiento.</p></div><span class="version">v8 · observación longitudinal</span></header>
+<header><div><h1>Registro de Estado</h1><p>Seguimiento longitudinal de sueño, estado, contexto y funcionamiento.</p></div><span class="version">v9 · línea temporal sueño–vigilia</span></header>
 <main>
 <section class="card">
 <h2>Nuevo registro</h2>
-<p class="muted">Un registro es simplemente una observación en un momento concreto. No necesitas decidir si lo que ocurrió fue un «evento» o un «episodio»; los cambios se analizan posteriormente a partir de la secuencia temporal.</p>
-<form id="entryForm">
-<div class="grid">
+<p class="muted">Registra cómo estás en un momento concreto. El sueño se registra por separado y la aplicación relaciona automáticamente cada observación con la línea temporal sueño–vigilia.</p>
+<form id="entryForm"><div class="grid">
 <label>Fecha<input id="date" type="date" required></label>
 <label>Hora / momento<input id="time" type="time"></label>
-<label>Horas de sueño<input id="sleepHours" type="number" min="0" max="24" step="0.1"></label>
-<label>Inicio del sueño<input id="sleepStart" type="time"></label>
-<label>Fin del sueño / desperté a<input id="sleepEnd" type="time"><small>Permite calcular automáticamente el tiempo despierto.</small></label>
-<label>Calidad del sueño (1–5)<select id="sleepQuality"><option value="">—</option><option value="1">1 — Muy mala</option><option value="2">2 — Mala</option><option value="3">3 — Regular</option><option value="4">4 — Buena</option><option value="5">5 — Excelente</option></select><small>Qué tan reparador fue el sueño, independientemente de las horas.</small></label>
-<label>Necesidad percibida de dormir (1–5)<select id="sleepNeed"><option value="">—</option><option value="1">1 — Mucho menor de lo habitual</option><option value="2">2 — Algo menor</option><option value="3">3 — Habitual</option><option value="4">4 — Algo mayor</option><option value="5">5 — Mucho mayor</option></select></label>
-<label>¿Sentí menor necesidad de dormir?<select id="reducedNeed"><option value="">—</option><option>Sí</option><option>No</option><option>No estoy seguro</option></select></label>
-<label>¿Me sentí descansado al despertar?<select id="rested"><option value="">—</option><option>Sí</option><option>No</option><option>No estoy seguro</option></select></label>
 <label>Energía (1–5)<select id="energy"><option value="">—</option><option value="1">1 — Extremadamente baja</option><option value="2">2 — Baja</option><option value="3">3 — Habitual</option><option value="4">4 — Alta</option><option value="5">5 — Excepcionalmente alta</option></select></label>
 <label>Ánimo bajo (1–5)<select id="lowMood"><option value="">—</option><option value="1">1 — Ausente o mínimo</option><option value="2">2 — Leve</option><option value="3">3 — Moderado</option><option value="4">4 — Intenso</option><option value="5">5 — Muy intenso</option></select></label>
 <label>Activación / aceleración (1–5)<select id="activation"><option value="">—</option><option value="1">1 — Muy baja / apagado</option><option value="2">2 — Baja</option><option value="3">3 — Habitual</option><option value="4">4 — Alta / acelerado</option><option value="5">5 — Muy alta / extrema</option></select></label>
@@ -47,7 +39,19 @@
 <label class="wide">Conductas relevantes<textarea id="behaviors" placeholder="Cambios de actividad, aislamiento, impulsos, búsqueda de estímulos, conductas de riesgo, etc."></textarea></label>
 <label class="wide">Observación libre<textarea id="observation" placeholder="Describe lo que ocurrió sin intentar interpretarlo o diagnosticarlo."></textarea></label>
 </div><div class="actions"><button>Guardar registro</button><button type="button" class="secondary" id="clearBtn">Limpiar</button></div></form></section>
-<section class="card"><h2>Cronología</h2><p class="muted">Las observaciones se ordenan por fecha y hora. El tiempo despierto se calcula automáticamente cuando existe una hora de despertar registrada.</p>
+<section class="card"><h2>Sueño</h2>
+<p class="muted">El sueño es un período independiente. Regístralo una vez por cada período de sueño; no necesitas repetirlo en cada observación de estado.</p>
+<div id="sleepGap" class="sleep-gap" hidden></div>
+<form id="sleepForm"><div class="grid">
+<label>Me dormí<input id="sleepStartDate" type="date"></label><label>Hora de inicio<input id="sleepStartTime" type="time"></label>
+<label>Desperté<input id="sleepEndDate" type="date"></label><label>Hora de fin<input id="sleepEndTime" type="time"></label>
+<label>Calidad del sueño (1–5)<select id="sleepQuality"><option value="">—</option><option value="1">1 — Muy mala</option><option value="2">2 — Mala</option><option value="3">3 — Regular</option><option value="4">4 — Buena</option><option value="5">5 — Excelente</option></select><small>Qué tan reparador fue el sueño, independientemente de las horas.</small></label>
+<label>Necesidad percibida de dormir (1–5)<select id="sleepNeed"><option value="">—</option><option value="1">1 — Mucho menor de lo habitual</option><option value="2">2 — Algo menor</option><option value="3">3 — Habitual</option><option value="4">4 — Algo mayor</option><option value="5">5 — Mucho mayor</option></select></label>
+<label>¿Sentí menor necesidad de dormir?<select id="reducedNeed"><option value="">—</option><option>Sí</option><option>No</option><option>No estoy seguro</option></select></label>
+<label>¿Me sentí descansado al despertar?<select id="rested"><option value="">—</option><option>Sí</option><option>No</option><option>No estoy seguro</option></select></label>
+</div><div class="actions"><button type="submit">Guardar sueño</button><button type="button" class="secondary" id="clearSleepBtn">Limpiar</button></div></form>
+<div id="sleepList"></div></section>
+<section class="card"><h2>Cronología</h2><p class="muted">Las observaciones se ordenan por fecha y hora. El tiempo despierto se calcula a partir del último sueño registrado y puede quedar indeterminado si existe una interrupción no documentada.</p>
 <div class="toolbar"><label>Desde<input id="from" type="date"></label><label>Hasta<input id="to" type="date"></label><button id="todayBtn" class="secondary">Últimos 14 días</button></div><div id="timeline"></div></section>
 
 <section class="card"><h2>Patrones descriptivos</h2><p class="muted">Señala coincidencias, desviaciones y calidad de los datos. No establece diagnósticos ni causalidad.</p><div id="patterns" class="patterns"></div></section>
